@@ -1,78 +1,47 @@
-import time
-from random import randint
+# Make two pieces of code (e.g. calculator).
+# Ask the user which one they would like to 
+# run, then call the function allocated
 
-print("What is your first name?")
-first_name = input()
-print("What is your last name?")
-last_name = input()
+def add(a, b):
+    return a + b
 
-print("What is your email for the account?")
-email = input()
+def take_away(a, b):
+    return a - b
 
-print("Your email is", email, "— is this correct?")
-answer = input()
-if answer.lower() == "yes":
-    print("Great, let's continue!")
-else:
-    print("Let's try again later.")
+def multiply(a, b):
+    return a * b
 
-password = "coneman"
+def divde(a, b):
+    return a / b
+
 while True:
-    print("What is your password?")
-    answer = input()
-    if answer == password:
-        print("That is right, let's continue")
-        break
-    else:
-        print("That's incorrect")
+    user_input = input("Would you like to do Add, Sub, multiply or Divde ").lower()
+    if user_input == "add":
+        num1 = int(input("First Number "))
+        num2 = int(input("Second Number"))
 
-print("Security question: what is your favourite colour?")
-fav_colour = input()
+        answer = add(num1 + num2)
+        print(f"The answer is {answer}")
 
-print("What is your current age?")
-current_age = input()
-age = int(current_age)
-print("You are", age, "and called", first_name)
-if age > 18:
-    print("You are a grown adult")
-elif age > 13:
-    print("You are an annoying teenager")
-else:
-    print("You are a little child, get off the phone")
+    elif user_input == "sub":
+        num3 = int(input("First Number "))
+        num4 = int(input("Second Number"))
 
-guesses = 0
-while guesses < 3:
-    answer = input("Say the magic word: ")
-    if answer == "YIPIEE":
-        print("Yipeeee you got it right boy, come on in 🎉")
-        break
-    else:
-        guesses += 1
-        if guesses < 3:
-            print("Oh bro you got it wrong, you have", 3 - guesses, "more chance(s) — you can do it 💪")
-        else:
-            print("Too many tries! Locked out 🚫")
-            time.sleep(600)  # 10 minutes
+        answer2 = take_away(num3, num4)
+        print(f"The answer is {answer2}")
+    
+    elif user_input == "multiply":
+        num4 = int(input("First Number "))
+        num5 = int(input("Second Number"))
+
+        answer3 = multiply("num5, num6")
+        print(f"The answer {answer3}")
+
+    elif user_input == divde:
+        num1 = int(input("First Number "))
+        num2 = int(input("Second Number"))
+
+        answer4 = divde("num6, num7")
+        print(f"The answer is {answer4}")
 
 
-rand_num = randint(11,99)
-print("To Prove That Your Not A Robot Please Type", rand_num)
-rand_guess = int(input())
-if rand_num == rand_guess:
-    print("Access Granted🔓")
-else:
-    print("You Are A Robot Bye Bye🔒")
-    exit()
-
-print()
-print("Would you like to buy a starter pack?")
-print("For the cost of £1.99?")
-print("Please answer with -Yes- or -No-")
-answer = input()
-answer = answer.lower()
-
-print("\n📋 Profile Summary:")
-print("Name:", first_name, last_name)
-print("Age:", age)
-print("Favourite colour:", fav_colour)
-print("Email:", email)
