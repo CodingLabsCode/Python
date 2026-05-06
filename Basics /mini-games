@@ -1,0 +1,92 @@
+from random import randint
+from random import choice
+from time import sleep
+
+
+def lobby():
+    global user_input
+    user_input = input("==== Mini Games ====\n---- Select A Game ----\n1()Rock Paper Scissors\n2()Times Tables\n3()Number Guessing\n")
+    sleep(0.4)
+lobby()
+
+match user_input:
+    case "1":
+        options = ["paper", "rock", "scissors"]
+        p_socre = 0
+        c_score = 0
+
+        while p_socre< 3 and c_score < 3:
+            user_choice = input("\nEnter a option Rock Paper or Scissors\n").lower()
+            print("\nLoading Computer choice")
+            sleep(0.5)
+            computer_choice = choice(options)
+
+            win = user_choice == "rock" and computer_choice == "scissors" or \
+                user_choice == "paper" and computer_choice == "rock" or \
+                user_choice == "scissors" and computer_choice == "paper" \
+            
+            if win:
+                print(f"\nYou won this round Your choice: {user_choice} | Computer choice: {computer_choice}\n")
+                p_socre += 1
+            elif user_choice == computer_choice:
+                print(f"\nDraw no one got a point Your choice: {user_choice} | Computer choice: {computer_choice}\n")
+            else:
+                print(f"\nComputer won this round Your choice: {user_choice} | Computer choice: {computer_choice}\n")
+                c_score += 1
+       
+        if p_socre == 3:
+            print(f"You won well done Your point: {p_socre} | Computer points: {c_score}")
+            sleep(0.3)
+        else:
+            print("Computer won")
+            sleep(0.3)
+
+        lobby()
+    case "2":
+        user_questions = int(input("\nHow many qestions would you like\n"))
+        print("Loading questions\n")
+        sleep(0.5)
+
+
+        questions = user_questions
+        incorrect = 0 
+        correct = 0
+        orgianl_questions = questions
+        try:
+            while True:
+                if questions == 0:
+                    print(f"You got {correct}/ {orgianl_questions}")
+                    percentage = correct / 10 * 100
+                    lobby()
+                    break
+                
+                num1 = randint(2,12)
+                num2 = randint(2,12)
+                answer = num1 * num2
+                sleep(0.2)
+                input_user = int(input(f"{num1} x {num2} ="))
+
+                if input_user == answer:
+                    correct += 1
+                    questions -= 1 
+                    print(f"Correct | Questions left {questions}")
+                    sleep(0.2)
+                else:
+                    incorrect += 1
+                    questions -= 1
+                    print(f"Incorrect | Questions left {questions}")
+                    sleep(0.2)
+        except ValueError:
+            print("Enter a number")
+    
+    case "3":
+        number = randint(1,10)
+        guess = int(input("Guess a number between 1, 10"))
+
+        if guess > number:
+            print("Too low")
+        elif guess < number:
+            print("Too high")
+        else:
+            print("Well done you guessed the number")
+            lobby()
