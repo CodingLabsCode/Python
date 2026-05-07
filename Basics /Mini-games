@@ -15,6 +15,7 @@ def tts():
         while True:
             if questions == 0:
                 print(f"You got {correct}/ {orgianl_questions}")
+                sleep(0.3)
                 lobby()
                 break
                     
@@ -39,10 +40,10 @@ def tts():
 
 def rps():
     options = ["paper", "rock", "scissors"]
-    p_socre = 0
-    c_score = 0
+    player_score = 0
+    computer_score = 0
 
-    while p_socre< 3 and c_score < 3:
+    while player_score< 3 and computer_score < 3:
             user_choice = input("\nEnter a option Rock Paper or Scissors\n").lower()
             print("\nLoading Computer choice")
             sleep(0.5)
@@ -54,46 +55,49 @@ def rps():
                 
             if win:
                 print(f"\nYou won this round Your choice: {user_choice} | Computer choice: {computer_choice}\n")
-                p_socre += 1
+                player_score += 1
             elif user_choice == computer_choice:
                 print(f"\nDraw no one got a point Your choice: {user_choice} | Computer choice: {computer_choice}\n")
             else:
+                computer_score += 1
                 print(f"\nComputer won this round Your choice: {user_choice} | Computer choice: {computer_choice}\n")
-                c_score += 1
         
-    if p_socre == 3:
-        print(f"You won well done Your point: {p_socre} | Computer points: {c_score}")
+    if player_score == 3:
+        print(f"You won well done Your points: {player_score} | Computer points: {computer_score}\n")
         sleep(0.3)
+        lobby()
     else:
-        print("Computer won")
+        print(f"Computer won Computer points: {player_score} | Your points: {player_score}\n")
         sleep(0.3)
+        lobby()
 
-    lobby()
 
 def numberguess():
-    number = randint(1,10)
-    guess = int(input("Guess a number between 1, 10:"))
+    number = randint(1,6)
+    guess = int(input("Guess a number between 1, 10:\n"))
 
-    if guess > number:
-        print("Too low:")
-    elif guess < number:
-        print("Too high:")
-    else:
-        print("Well done you guessed the number")
+    while guess != number:
+        guess = int(input("Try Again\n"))
+
+        if guess < number:
+            print("To Low:\n")
+        elif guess > number:
+            print("To High:\n")
+
+    if guess == number:
+        print("You got it right well done")
         sleep(0.3)
         lobby()
 
 def lobby():
-    global user_input
-    user_input = input("==== Mini Games ====\n---- Select A Game ----\n1()Rock Paper Scissors\n2()Times Tables\n3()Number Guessing\n")
-    sleep(0.4)
-    
-
-    match user_input:
-        case "1":
-            rps()
-        case "2":
-            tts()
-        case "3":
-            numberguess()
+        global user_input
+        user_input = input("==== Mini Games ====\n---- Select A Game ----\n1()Rock Paper Scissors\n2()Times Tables\n3()Number Guessing\n==== More Coming Soon ====\nEnter Option: ")
+        sleep(0.4)
+        match user_input:
+            case "1":
+                rps()
+            case "2":
+                tts()
+            case "3":
+                numberguess()
 lobby()
