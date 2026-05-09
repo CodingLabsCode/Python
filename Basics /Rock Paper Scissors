@@ -2,22 +2,25 @@ from random import choice
 from time import sleep
 count = 0
 player_score = 0; computer_score = 0
-print("You are going to play 3 games of rock paper scissors");sleep(1)
-for i in range(3):
+games = int(input("How many games would you like to play: "))
+print(f"You are going to play {games} games of rock paper scissors");sleep(1)
+for x in range(games):
     count += 1
     options = ["rock", "paper", "scissors"]
-    print(f"==== ROUND {count} ====");sleep(0.5)
+    print(f"==== GAME {count} ====");sleep(0.9)
     user = input("Enter choice: Rock , Paper , Scissors\nEnter option: ").lower()
+    while user not in options:user = input("\nEnter choice: Rock , Paper , Scissors\nEnter option: ").lower()
+    print("\nLoading computer choice");sleep(1)
     computer_choice = choice(options)
     win = user == "paper" and computer_choice == "rock" or \
         user == "scissors" and computer_choice == "paper" or \
         user == "rock" and computer_choice == "scissors" \
         
     if win:
-         print(f"Win Computer Output: {computer_choice}\n");sleep(0.5);player_score += 1
+         print(f"\nWin Computer Output: {computer_choice}\n");sleep(0.5);player_score += 1
     elif user == computer_choice:
-        print(f"Draw Computer Output: {computer_choice}\n");sleep(0.5);
+        print(f"\nDraw Computer Output: {computer_choice}\n");sleep(0.5);
     else:
-        print(f"Lose Computer Output: {computer_choice}\n");sleep(0.5);computer_score += 1
+        print(f"\nLose Computer Output: {computer_choice}\n");sleep(0.5);computer_score += 1
 
 print(f"Your score: {player_score} | Computer score: {computer_score}")
