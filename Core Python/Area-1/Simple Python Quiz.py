@@ -36,11 +36,11 @@ answer_four = "1"
 
 correct = 0
 incorrect = 0
-AmountOfQuestions = 4
+AmountOfQuestions = len(questions)
 print("=== PYTHON QUIZ ===")
 input("Press Enter To Begin: ")
 start = t()
-for i in range(4):
+for i in range(len(questions)):
     AmountOfQuestions -= 1
     choice = c(questions)
     questions.remove(choice)
@@ -60,7 +60,7 @@ for i in range(4):
         else:
             print(f"Incorrect | Questions Left {AmountOfQuestions}")
             incorrect += 1
-    elif question_three:
+    elif choice == question_three:
         user = input(choice)
         if user == answer_three:
             print(f"Correct | Questions Left {AmountOfQuestions}")
@@ -68,14 +68,12 @@ for i in range(4):
         else:
             print(f"Incorrect | Questions Left {AmountOfQuestions}")
             incorrect += 1
-    elif question_four:
+    elif choice == question_four:
         user = input(choice)
         if user == answer_four:
-            AmountOfQuestions -= 1
             print(f"Correct | Questions Left {AmountOfQuestions}")
             correct += 1
         else:
-            AmountOfQuestions -= 1
             print(f"Incorrect | Questions Left {AmountOfQuestions}")
             incorrect += 1
 end = t()
