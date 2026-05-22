@@ -1,0 +1,8 @@
+nums = ["2","5","3","9","1","6","4","7","8"]
+count = 0
+user = input("Do you want the numbers to be in reverse (y/n): ")
+if user == "y": nums.sort(reverse=True)
+else: nums.sort()
+for i in nums:
+    count += 1
+    print(f"{count}: {i}")
