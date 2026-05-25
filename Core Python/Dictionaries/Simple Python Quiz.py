@@ -4,7 +4,7 @@ from time import time as t
 questions = [
     {"q": "How Do You Call A Function\n(1)greet()\n(2)def.greet\n(3)say.greet()\n Enter Answer: ", "a": "1"},
     {"q": "How Do You Make a Function\n(1)func\n(2)function\n(3)def\nEnter Answer: ", "a": "3"},
-    {"q": "How Do You Make A List\n(1)var[]\n(2)var()\n(3)var <>\nEnter Answer: ","a": "2"}
+    {"q": "How Do You Make A List\n(1)var[]\n(2)var{}\n(3)var <>\nEnter Answer: ","a": "1"}
 ]
 questionsLeft = len(questions)
 s(questions)
