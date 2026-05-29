@@ -1,2 +1,2 @@
 # Python
-Just a timeline for my learning python really
+just a place to post my code really 
