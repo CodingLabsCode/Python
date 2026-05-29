@@ -1,5 +1,5 @@
-from random import shuffle as s
-from time import time as t
+from random import shuffle 
+from time import time 
 Bonus_score = False
 questions = [
     {"q": "How Do You Make A List\n(1)var = {}\n(2)var = ()\n(3)var = []\n(4)var = <>\nEnter Answer: ", "a": "3"},
@@ -9,7 +9,7 @@ questions = [
     {"q": "Which One Prints Stuff To The Screen\n(1)echo()\n(2)print\n(3)say\n(4)show\nEnter Answer: ", "a": "2"},
     {"q": "What Data Type Is /Hello/\n(1)string\n(2)float\n(3)integer\n(4)boonlean\nEnter Answer: ", "a": "1"}
 ]
-s(questions)
+shuffle(questions)
 
 questionsLeft = len(questions)
 amoutOfQuestions = len(questions)
@@ -22,9 +22,11 @@ print("=== Python Quiz ===")
 print("If You Get A Streak Of 3 You Get A Score Bonus Of 4")
 print("You Get 2 Score For Each Qestion You Get Correct BUT For Eacb Questions You Get Incorrect You Lose 1 Score")
 input("Press Enter To Begin: ")
-start = t()
-for item in questions:
+start = time()
+for i, item in enumerate(questions, start=1):
+    print(f"Question {i} | Questions Left {questionsLeft}\n")
     user = input(item["q"])
+    print("\n", end="")
     questionsLeft -= 1
     if user == item["a"]:
         correct += 1
@@ -34,14 +36,14 @@ for item in questions:
             score += 4 
             Bonus_score = True
             print("Bonus Score Of 4 Added")
-        print(f"Correct You Are On A Streak Of {streak} | Questions Left {questionsLeft}")
+        print(f"Correct | Streak {streak}")
     else:
         incorrect += 1
         score -= 1
         streak = 0
-        print(f"Incorrect You Are On A Streak Of {streak} | Questions Left {questionsLeft}")
+        print(f"Incorrect | Streak {streak}\n")
     if score <= -1: score = 0
-end = t()
+end = time()
 time_taken = end - start
 print("You Got An Insane Time" if time_taken <=20 else "You Got A Good Time" )
 finshed = f"""=== Results ===
