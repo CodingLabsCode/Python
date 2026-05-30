@@ -19,7 +19,7 @@ score = 0
 streak = 0
 
 print("=== Python Quiz ===")
-print("If You Get A Streak Of 3 You Get A Score Bonus Of 4")
+print("If You Get A Streak Of 4 You Get A Score Bonus Of 5")
 print("You Get 2 Score For Each Qestion You Get Correct BUT For Eacb Questions You Get Incorrect You Lose 1 Score")
 input("Press Enter To Begin: ")
 start = time()
@@ -32,10 +32,10 @@ for i, item in enumerate(questions, start=1):
         correct += 1
         score += 2
         streak += 1
-        if streak >=3 and Bonus_score == False: 
-            score += 4 
+        if streak >=4 and Bonus_score == False: 
+            score += 5 
             Bonus_score = True
-            print("Bonus Score Of 4 Added")
+            print("\nBonus Score Of 5 Added")
         print(f"Correct | Streak {streak}")
     else:
         incorrect += 1
