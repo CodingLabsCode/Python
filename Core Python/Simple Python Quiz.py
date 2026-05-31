@@ -2,10 +2,8 @@ from random import shuffle
 from time import time , sleep
 from pathlib import Path
 
-highscoreScore = Path("Score High Score.txt")
-highscoreStreak = Path("Streak HighScore.txt")
-
-Bonus_score = False
+highscoreScore_file = Path("Score HighScore.txt")
+highscoreStreak_file = Path("Streak HighScore.txt")
 
 questions = [
     {"q": "How Do You Make A List\n(1)var = {}\n(2)var = ()\n(3)var = []\n(4)var = <>\nEnter Answer: ", "a": "3"},
@@ -23,9 +21,16 @@ correct = 0
 incorrect = 0
 score = 0
 streak = 0
-def game():
-    global scoreScore
-    global streakscore
+highscore_streak = []
+highscore_score = []
+while True:
+    Bonus_score = False
+    questionsLeft = len(questions)
+    amountOfQuestions = len(questions)
+    correct = 0
+    incorrect = 0
+    score = 0
+    streak = 0
     print("=== Python Quiz ===")
     print("If You Get A Streak Of 4 You Get A Score Bonus Of 5")
     print("You Get 2 Score For Each Question You Get Correct BUT For Each Questions You Get Incorrect You Lose 1 Score")
@@ -62,8 +67,6 @@ def game():
     print("You Got An Insane Time" if time_taken <=20 and correct >=3 else "You Got A Good Time And Maybe Try To Get Some More Questions Correct" )
     print("You Got A Bonus Score Of 5 Added" if Bonus_score == True else "You Did Not Get A Bonus Score")
     print(finshed);sleep(5)
-    highscore_streak = []
-    highscore_score = []
 
     highscore_score.append(score)
     highscore_streak.append(streak)
@@ -71,10 +74,10 @@ def game():
     sorted_score = sorted(highscore_score,reverse= True)
     sorted_streak_score = sorted(highscore_streak, reverse=True)
 
-    with "Score High Score.txt".open as f:
-        f.write(f"{score}\n")
-    with "Streak HighScore.txt".open as f:
-        f.write(f"{streak}\n")
+    with highscoreScore_file.open("w") as f:
+        f.write(f"{str(score)}\n")
+    with highscoreStreak_file.open("w") as f:
+        f.write(f"{str(streak)}\n")
 
     def streakscore():
         for i, line in enumerate(sorted_streak_score, start=1):
@@ -82,15 +85,15 @@ def game():
     def scoreScore():
         for i, line in enumerate(sorted_score, start=1):
             print(f"{i}: {line}")
-while True:
-    see_stats = input("=== STATS ===\n(1)Score Highscores\n(2)Streak HighScore\n(3)Play Again\n(4)Exit\nEnter Choice: ")
-    match see_stats:
-        case "1":
-            scoreScore()
-        case "2":
-            streakscore()
-        case "3":
-            game()
-        case "4":
-            print("GoodBye")
-            exit()
+    while True:
+        see_stats = input("=== STATS ===\n(1)Score Highscores\n(2)Streak HighScore\n(3)Play Again\n(4)Exit\nEnter Choice: ")
+        match see_stats:
+            case "1":
+                scoreScore()
+            case "2":
+                streakscore()
+            case "3":
+                break
+            case "4":
+                print("GoodBye")
+                exit()
