@@ -3,7 +3,7 @@ from time import time , sleep
 from pathlib import Path
 
 highscoreScore = Path("Score High Score.txt")
-highscoreStreak = Path("Streak HighScore")
+highscoreStreak = Path("Streak HighScore.txt")
 
 Bonus_score = False
 
@@ -23,68 +23,74 @@ correct = 0
 incorrect = 0
 score = 0
 streak = 0
+def game():
+    global scoreScore
+    global streakscore
+    print("=== Python Quiz ===")
+    print("If You Get A Streak Of 4 You Get A Score Bonus Of 5")
+    print("You Get 2 Score For Each Question You Get Correct BUT For Each Questions You Get Incorrect You Lose 1 Score")
+    input("Press Enter To Begin: ")
+    start = time()
+    for i, item in enumerate(questions, start=1):
+        print(f"Question {i} | Questions Left {questionsLeft}\n")
+        user = input(item["q"])
+        print("\n", end="")
+        questionsLeft -= 1
+        if user == item["a"]:
+            correct += 1
+            score += 2
+            streak += 1
+            if streak >=4 and Bonus_score == False: 
+                score += 5 
+                Bonus_score = True
+            print(f"Correct | Streak {streak}")
+        else:
+            incorrect += 1
+            score -= 1
+            streak = 0
+            print(f"Incorrect | Streak {streak}\n")
+        if score <= -1: score = 0
+    end = time()
+    time_taken = end - start
+    finshed = f"""=== Results ===
+    Correct {correct} / {amountOfQuestions}
+    Incorrect {incorrect} / {amountOfQuestions}
+    Streak {streak}
+    Score {score}
+    Time Taken {end - start:.2f}
+    """
+    print("You Got An Insane Time" if time_taken <=20 and correct >=3 else "You Got A Good Time And Maybe Try To Get Some More Questions Correct" )
+    print("You Got A Bonus Score Of 5 Added" if Bonus_score == True else "You Did Not Get A Bonus Score")
+    print(finshed);sleep(5)
+    highscore_streak = []
+    highscore_score = []
 
-print("=== Python Quiz ===")
-print("If You Get A Streak Of 4 You Get A Score Bonus Of 5")
-print("You Get 2 Score For Each Question You Get Correct BUT For Each Questions You Get Incorrect You Lose 1 Score")
-input("Press Enter To Begin: ")
-start = time()
-for i, item in enumerate(questions, start=1):
-    print(f"Question {i} | Questions Left {questionsLeft}\n")
-    user = input(item["q"])
-    print("\n", end="")
-    questionsLeft -= 1
-    if user == item["a"]:
-        correct += 1
-        score += 2
-        streak += 1
-        if streak >=4 and Bonus_score == False: 
-            score += 5 
-            Bonus_score = True
-        print(f"Correct | Streak {streak}")
-    else:
-        incorrect += 1
-        score -= 1
-        streak = 0
-        print(f"Incorrect | Streak {streak}\n")
-    if score <= -1: score = 0
-end = time()
-time_taken = end - start
-finshed = f"""=== Results ===
-Correct {correct} / {amountOfQuestions}
-Incorrect {incorrect} / {amountOfQuestions}
-Streak {streak}
-Score {score}
-Time Taken {end - start:.2f}
-"""
-print("You Got An Insane Time" if time_taken <=20 and correct >=3 else "You Got A Good Time" )
-print("You Got A Bonus Score Of 5 Added" if Bonus_score == True else "You Did Not Get A Bonus Score")
-print(finshed);sleep(5)
-highscore_streak = []
-highscore_score = []
+    highscore_score.append(score)
+    highscore_streak.append(streak)
 
-highscore_score.append(score)
-highscore_streak.append(streak)
+    sorted_score = sorted(highscore_score,reverse= True)
+    sorted_streak_score = sorted(highscore_streak, reverse=True)
 
-highscoreStreak.write_text(f"{str(streak)}")
-highscoreScore.write_text(f"{str(score)}\n")
+    with "Score High Score.txt".open as f:
+        f.write(f"{score}\n")
+    with "Streak HighScore.txt".open as f:
+        f.write(f"{streak}\n")
 
-sorted_score = sorted(highscore_score,reverse= True)
-sorted_streak_score = sorted(highscore_streak, reverse=True)
-
-def streakscore():
-    for i, line in enumerate(sorted_streak_score, start=1):
-        print(f"{i}: {line}")
-def scoreScore():
-     for i, line in enumerate(sorted_score, start=1):
-        print(f"{i}: {line}")
+    def streakscore():
+        for i, line in enumerate(sorted_streak_score, start=1):
+            print(f"{i}: {line}")
+    def scoreScore():
+        for i, line in enumerate(sorted_score, start=1):
+            print(f"{i}: {line}")
 while True:
-    see_stats = input("=== STATS ===\n(1)Score Highscores\n(2)Streak HighScore\n(3)Exit\nEnter Choice: ")
+    see_stats = input("=== STATS ===\n(1)Score Highscores\n(2)Streak HighScore\n(3)Play Again\n(4)Exit\nEnter Choice: ")
     match see_stats:
         case "1":
             scoreScore()
         case "2":
             streakscore()
         case "3":
+            game()
+        case "4":
             print("GoodBye")
             exit()
