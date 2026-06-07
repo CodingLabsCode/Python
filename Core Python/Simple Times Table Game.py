@@ -1,32 +1,51 @@
-from random import randint as r
-from time import time as t
+from random import randint
+
+def error(msg):
+    print(f"[ERROR] {msg}")
+def mul(x,y):
+    return x * y
+
+bouns_score = False
+streak = 0
 correct = 0
 incorrect = 0
-questions = int(input("How Many Qestions Would You Like: "))
-beforeQuestions = questions
-start = t()
-while True:
-    if questions == 0 :
-       end = t()
-       print(
-           f"Time Taken {end - start:.2f}\n"
-           f"{correct} Correct\n"
-           f"{incorrect} Incorrect\n"
-           f"{correct} / {beforeQuestions}"
-       )
-       break
+questions = 10
+score = 0
+beForQuestions = questions
+count = 0
+input("Click Enter When Ready")
+while questions != 0:
+    count += 1
+    num1 = randint(2,12)
+    num2 = randint(2,12)
+    answer = mul(num1,num2)
+
+    print(f"QUESTION {count}")
+
     try:
-        num1, num2 = r(2,12) , r(2,12)
-        product = num1 * num2
         user = int(input(f"{num1} x {num2} = "))
         questions -= 1
-
-        if user == product:
+        if user == answer:
             correct += 1
-            print(f"Correct | Qestions Left {questions}")
+            score += 2
+            streak += 1
+            print(f"Correct | Questions Left {questions}")
+            if streak == 5 and bouns_score == False:
+                score += 5
+                bouns_score = True
         else:
             incorrect += 1
+            score -= 1
+            streak = 0
             print(f"Incorrect | Questions Left {questions}")
     except ValueError:
+        error("Invaild Intger")
         questions += 1
-        print("Numbers Only")
+        count -= 1
+finshed = f"""Results
+Correct {correct} / {beForQuestions}
+Incorrect {incorrect} / {beForQuestions}
+Score {score}
+Streak {streak}"""
+
+print(finshed)
